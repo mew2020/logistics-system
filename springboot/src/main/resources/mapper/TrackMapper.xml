@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cqcst.mapper.TrackMapper">
+
+    <resultMap id="BaseResultMap" type="com.cqcst.entity.Track">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="orderId" column="order_id" jdbcType="INTEGER"/>
+            <result property="location" column="location" jdbcType="CHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="siteId" column="site_id" jdbcType="INTEGER"/>
+            <result property="siteName" column="site_name" jdbcType="CHAR"/>
+            <result property="adminId" column="admin_id" jdbcType="INTEGER"/>
+            <result property="adminName" column="admin_name" jdbcType="CHAR"/>
+            <result property="courierId" column="courier_id" jdbcType="INTEGER"/>
+            <result property="courierName" column="courier_name" jdbcType="CHAR"/>
+            <result property="courierPhone" column="courier_phone" jdbcType="CHAR"/>
+            <result property="status" column="status" jdbcType="INTEGER"/>
+            <result property="remark" column="remark" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,order_id,location,
+        create_time,site_id,site_name,
+        admin_id,admin_name,courier_id,
+        courier_name,courier_phone,status,
+        remark
+    </sql>
+</mapper>

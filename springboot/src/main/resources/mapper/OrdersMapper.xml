@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cqcst.mapper.OrdersMapper">
+
+    <resultMap id="BaseResultMap" type="com.cqcst.entity.Orders">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="userId" column="user_id" jdbcType="INTEGER"/>
+            <result property="status" column="status" jdbcType="INTEGER"/>
+            <result property="senderName" column="sender_name" jdbcType="CHAR"/>
+            <result property="senderPhone" column="sender_phone" jdbcType="CHAR"/>
+            <result property="senderAddress" column="sender_address" jdbcType="VARCHAR"/>
+            <result property="receiverName" column="receiver_name" jdbcType="CHAR"/>
+            <result property="receiverPhone" column="receiver_phone" jdbcType="CHAR"/>
+            <result property="receiverAddress" column="receiver_address" jdbcType="VARCHAR"/>
+            <result property="pickerId" column="picker_id" jdbcType="INTEGER"/>
+            <result property="pickerName" column="picker_name" jdbcType="CHAR"/>
+            <result property="dispatcherId" column="dispatcher_id" jdbcType="INTEGER"/>
+            <result property="dispatcherName" column="dispatcher_name" jdbcType="CHAR"/>
+            <result property="goods" column="goods" jdbcType="CHAR"/>
+            <result property="weight" column="weight" jdbcType="DOUBLE"/>
+            <result property="price" column="price" jdbcType="DOUBLE"/>
+            <result property="expectedTime" column="expected_time" jdbcType="TIMESTAMP"/>
+            <result property="paymentMethod" column="payment_method" jdbcType="CHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="isDeleted" column="is_deleted" jdbcType="BIT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,user_id,status,
+        sender_name,sender_phone,sender_address,
+        receiver_name,receiver_phone,receiver_address,
+        picker_id,picker_name,dispatcher_id,
+        dispatcher_name,goods,weight,
+        price,expected_time,payment_method,
+        create_time,update_time,is_deleted
+    </sql>
+</mapper>
