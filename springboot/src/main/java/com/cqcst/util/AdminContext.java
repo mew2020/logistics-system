@@ -2,6 +2,7 @@ package com.cqcst.util;
 
 import com.cqcst.entity.Admin;
 
+//TODO: 鉴权有问题
 public class AdminContext {
 
     private static ThreadLocal<Admin> adminThreadLocal = new ThreadLocal<>();
