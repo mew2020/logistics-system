@@ -1,6 +1,7 @@
 package com.cqcst.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
@@ -25,6 +26,18 @@ public class User implements Serializable {
     private String phone;
 
     private Double balance;
+
+    @TableField(exist = false)
+    private Boolean disabled;
+
+    @TableField(exist = false)
+    private String name;
+
+    @TableField(exist = false)
+    private Integer siteId;
+
+    @TableField(exist = false)
+    private String siteName;
 
     private static final long serialVersionUID = 1L;
 
@@ -82,6 +95,38 @@ public class User implements Serializable {
 
     public void setBalance(Double balance) {
         this.balance = balance;
+    }
+
+    public Boolean getDisabled() {
+        return disabled;
+    }
+
+    public void setDisabled(Boolean disabled) {
+        this.disabled = disabled;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getSiteId() {
+        return siteId;
+    }
+
+    public void setSiteId(Integer siteId) {
+        this.siteId = siteId;
+    }
+
+    public String getSiteName() {
+        return siteName;
+    }
+
+    public void setSiteName(String siteName) {
+        this.siteName = siteName;
     }
 
     @Override

@@ -3,8 +3,10 @@ package com.cqcst.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cqcst.common.Result;
+import com.cqcst.entity.Courier;
 import com.cqcst.entity.User;
 import com.cqcst.mapper.UserMapper;
+import com.cqcst.service.CourierService;
 import com.cqcst.service.UserAvatarService;
 import com.cqcst.service.UserService;
 import org.springframework.stereotype.Service;
@@ -24,6 +26,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     @Resource
     private UserAvatarService userAvatarService;
 
+    @Resource
+    private CourierService courierService;
+
     @Override
     public Result login(User user) {
         LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
@@ -32,6 +37,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         User dbUser = getOne(queryWrapper);
 
         if(dbUser == null) return Result.error("NotExisted");
+        else if(dbUser.getStatus() == 2) {
+            //快递员 查信息
+            Courier courier = courierService.getById(dbUser.getId());
+            dbUser.setName(courier.getName());
+            dbUser.setDisabled(courier.getDisabled());
+            dbUser.setSiteId(courier.getSiteId());
+            dbUser.setSiteName(courier.getSiteName());
+        }
         dbUser.setPassword(null); //如果不为null，则设置密码为null后再回传
 
         //查询头像是否已经上传过，如果上传过就返回一个msg标识，否则不返回标识
