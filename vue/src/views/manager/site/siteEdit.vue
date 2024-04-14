@@ -1,4 +1,3 @@
-<!--此处修改申请表有点问题-->
 <template>
    <!-- :rules="rules" -->
   <el-form :model="data.form" label-width="120px" ref="formRef">

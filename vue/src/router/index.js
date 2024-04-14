@@ -29,8 +29,12 @@ const router = createRouter({
                 {path: 'map-demo2', name: 'map-demo2', component: () => import('@/views/manager/map-demo2.vue')},
                 {path: 'site', name: 'Site', component: () => import('@/views/manager/site/site.vue')},
                 {path: 'siteEdit', name: 'SiteEdit', component: () => import('@/views/manager/site/siteEdit.vue')},
-                {path: 'courier', name: 'Courier', component: () => import('@/views/manager/courier.vue')},
-                {path: 'order', name: 'Order', component: () => import('@/views/manager/order.vue')},
+                {path: 'user', name: 'User', component: () => import('@/views/manager/user.vue')},
+                {path: 'admin', name: 'Admin', component: () => import('@/views/manager/admin.vue')},
+                {path: 'order', name: 'Order', component: () => import('@/views/manager/order/order.vue')},
+                {path: 'orderDetail', name: 'OrderDetail', component: () => import('@/views/manager/order/orderDetail.vue')},
+                {path: 'PickupAndDelivery', name: 'PickupAndDelivery', component: () => import('@/views/PickupAndDelivery.vue')},
+                {path: 'stock', name: 'Stock', component: () => import('@/views/stock.vue')},
             ]
         },
         //每个页面都有路由，在该文件中添加新的路由

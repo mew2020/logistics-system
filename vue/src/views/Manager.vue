@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div style="height: 60px; background-color: #fff; display: flex; align-items: center; border-bottom: 1px solid #ddd">
+    <!-- <div style="height: 60px; background-color: #fff; display: flex; align-items: center; border-bottom: 1px solid #ddd">
       <div style="flex: 1">
         <div style="padding-left: 20px; display: flex; align-items: center">
           <img src="@/assets/imgs/logo.png" alt="" style="width: 40px">
@@ -11,6 +11,19 @@
         <img src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png" alt="" style="width: 40px; height: 40px">
         <span style="margin-left: 5px" v-if="data.user!=6">学生工作领导小组</span>
         <span style="margin-left: 5px" v-if="data.user==6">学生处</span>
+      </div>
+    </div> -->
+    <div style="height: 60px; background-color: #fff; display: flex; align-items: center; border-bottom: 1px solid #ddd">
+      <div style="flex: 1">
+        <div style="padding-left: 20px; display: flex; align-items: center">
+          <img src="@/assets/imgs/logo.png" alt="" style="width: 40px">
+          <div style="font-weight: bold; font-size: 24px; margin-left: 5px">物流管理系统</div>
+        </div>
+      </div>
+      <div style="width: fit-content; padding-right: 10px; display: flex; align-items: center;" >
+        <img src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png" alt="" style="width: 40px; height: 40px">
+        <!-- <span style="margin-left: 5px" v-if="data.user!=6">学生工作领导小组</span> -->
+        <span style="margin-left: 5px" v-if="data.user!=6" value="{{admin.siteName}} {{admin.name}}"></span>
       </div>
     </div>
 
@@ -74,9 +87,14 @@
             <span>站点管理</span>
           </el-menu-item>
 
-          <el-menu-item index="/courier" v-if="data.user!=6">
+          <el-menu-item index="/user" v-if="data.user!=6">
             <el-icon><User /></el-icon>
-            <span>员工管理</span>
+            <span>用户管理</span>
+          </el-menu-item>
+
+          <el-menu-item index="/admin" v-if="data.user!=6">
+            <el-icon><User /></el-icon>
+            <span>站点员工管理</span>
           </el-menu-item>
 
           
@@ -85,44 +103,25 @@
             <span>订单管理</span>
           </el-menu-item>
 
-          <el-sub-menu index="3" v-if="data.user!=6">
-            <template #title>
-              <el-icon><Guide /></el-icon>
-              <span>出入库管理</span>
-            </template>
-            <el-menu-item index="/video">
-              <el-icon><PictureFilled /></el-icon>
-              <span>轮播图信息</span>
-            </el-menu-item>
-            <el-menu-item index="/wenz">
-              <el-icon><List /></el-icon>
-              <span>文章信息</span>
-            </el-menu-item>
-          </el-sub-menu>
+          <el-menu-item index="/PickupAndDelivery" v-if="data.user!=6">
+            <el-icon><Van /></el-icon>
+            <span>取派件管理</span>
+          </el-menu-item>
 
-          <el-sub-menu index="3" v-if="data.user!=6">
-            <template #title>
-              <el-icon><Bicycle /></el-icon>
-              <span>取派件管理</span>
-            </template>
-            <el-menu-item index="/video">
-              <el-icon><PictureFilled /></el-icon>
-              <span>轮播图信息</span>
-            </el-menu-item>
-            <el-menu-item index="/wenz">
-              <el-icon><List /></el-icon>
-              <span>文章信息</span>
-            </el-menu-item>
-          </el-sub-menu>
+          <el-menu-item index="/stock" v-if="data.user!=6">
+            <el-icon><Guide /></el-icon>
+            <span>出入库管理</span>
+          </el-menu-item>
+          
 
           <el-menu-item index="/" v-if="data.user!=6">
             <el-icon><Warning /></el-icon>
             <span>投诉管理</span>
           </el-menu-item>
 
-          <el-menu-item index="/" v-if="data.user!=6">
-            <el-icon><Collection /></el-icon>
-            <span>运费模板管理</span>
+          <el-menu-item index="/test" v-if="data.user!=6">
+            <el-icon><Warning /></el-icon>
+            <span>dialog测试</span>
           </el-menu-item>
 
 <!--          此处开始是学生处的侧边菜单栏-->
@@ -170,22 +169,22 @@ const $route = useRoute()
 console.log($route.path)
 
 const data = reactive({
-  user:localStorage.getItem('student-user')
+  // user:localStorage.getItem('student-user'),
+  admin: localStorage.getItem('admin')
 })
-console.log(data.user)
 
 const load = () => {
   //此处是将字符串分割，返回角色信息
-  var temp;
-  for(let i=0;i<data.user.length-1;i++) {
-    temp = (data.user||"").split('"')
-    // 这个东西在网页的控制台显示
-    // console.log(temp[12][1])
-  }
-  // 此处是获取相应角色信息
-  // console.log(temp)
-  data.user=temp[12][1]
-  console.log(data.user)
+  // var temp;
+  // for(let i=0;i<data.user.length-1;i++) {
+  //   temp = (data.user||"").split('"')
+  //   // 这个东西在网页的控制台显示
+  //   // console.log(temp[12][1])
+  // }
+  // // 此处是获取相应角色信息
+  // // console.log(temp)
+  // data.user=temp[12][1]
+
 }
 load()
 

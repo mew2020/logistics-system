@@ -29,7 +29,9 @@ public class AdminLoginFilter implements Filter {
                 "/order",
                 "/order/*",
                 "/track",
-                "/track/*"
+                "/track/*",
+                "/admin",
+                "/admin/*"
         };
         for (String url : excludingUrls) {
             if (request.getRequestURI().contains(url)) {

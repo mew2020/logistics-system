@@ -15,13 +15,6 @@
           <el-input prefix-icon="Lock" v-model="data.form.password" placeholder="请输入密码"/>
           </el-form-item>
 
-          <!-- <el-form-item>
-            <el-radio-group v-model="data.form.role">
-              <el-radio :label="3">学生工作领导小组</el-radio>
-              <el-radio :label="6">学生处</el-radio>
-            </el-radio-group>
-          </el-form-item> -->
-
           <el-form-item>
 <!--            此处@click="login"实现与后端的绑定-->
             <el-button type="primary" style="width: 100%" @click="login">登录 </el-button>
@@ -53,7 +46,7 @@ const formRef = ref()
 const login=()=>{
   formRef.value.validate((valid)=>{
     if(valid){
-        request.post('/login',data.form).then(res => {
+        request.post('/admin/login',data.form).then(res => {
           if(res.code === '200'){
             localStorage.setItem('admin',JSON.stringify(res.data))//传递JSON字符串，放入缓存
             ElMessage.success('登陆成功')

@@ -20,7 +20,7 @@ public class TrackServiceImpl extends ServiceImpl<TrackMapper, Track>
     @Override
     public List<Track> getTrackByOrderId(Integer id) {
         LambdaQueryWrapper<Track> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(Track::getOrderId,id);
+        queryWrapper.eq(Track::getOrderId,id).orderByDesc(Track::getCreateTime);
         return list(queryWrapper);
     }
 }

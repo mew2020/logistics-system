@@ -1,9 +1,11 @@
 package com.cqcst.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cqcst.common.Result;
 import com.cqcst.entity.Courier;
+import com.cqcst.entity.Orders;
 import com.cqcst.entity.User;
 import com.cqcst.mapper.UserMapper;
 import com.cqcst.service.CourierService;
@@ -12,6 +14,7 @@ import com.cqcst.service.UserService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -102,6 +105,94 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         user.setId(id);
         user.setPassword(data.get("newPassword"));
         return updateById(user) == true ? Result.success() : Result.error("Error");
+    }
+
+    @Override
+    public List<User> getUserListByAdmin(String condition, Integer status) {
+        if(condition == null && status == null) {
+            List<User> list = list();
+            for(User user : list) {
+                Courier courier = courierService.getById(user.getId());
+                if(courier != null) {
+                    user.setName(courier.getName());
+                    user.setDisabled(courier.getDisabled());
+                    user.setSiteId(courier.getSiteId());
+                    user.setSiteName(courier.getSiteName());
+                }
+
+            }
+            return list;
+        }
+
+        LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
+        if(status != null) queryWrapper.eq(User::getStatus, status);
+        if(condition != null && !condition.equals("")) {
+            queryWrapper.like(User::getUsername, condition)
+                    .or().like(User::getPhone, condition)
+                    .or().like(User::getNickname, condition);
+        }
+        List<User> list = list(queryWrapper);
+        for(User user : list) {
+            if(user.getStatus() != 1) {
+                Courier courier = courierService.getById(user.getId());
+                if(courier != null) {
+                    user.setName(courier.getName());
+                    user.setDisabled(courier.getDisabled());
+                    user.setSiteId(courier.getSiteId());
+                    user.setSiteName(courier.getSiteName());
+                }
+            }
+        }
+
+        return list;
+    }
+
+    @Override
+    public boolean changeStatusByAdmin(Integer id) {
+        User user = getById(id);
+        if(user == null) throw new RuntimeException("User not found");
+
+        Integer status = user.getStatus();
+        if(status == 0) {
+            //先去查看有没有快递员数据，如果有且未被禁用，则将其设置为快递员(user.status = 2)，如果被禁用或没有快递员数据，则将其设置为用户(user.status = 1)
+            Courier courier = courierService.getById(id);
+            if(courier == null || courier.getDisabled() == true) {
+                user.setStatus(1);
+            } else {
+                user.setStatus(2);
+            }
+            return updateById(user);
+        } else {
+            //直接将其停权即可
+            user.setStatus(0);
+            return updateById(user);
+        }
+    }
+
+    @Override
+    public Result updateBalanceByAdmin(Map<String, Integer> map) {
+        Integer id = map.get("id");
+        User dbUser = getById(id);
+        if(dbUser == null) return Result.error("User not found");
+
+        UpdateWrapper<User> updateWrapper = new UpdateWrapper<>();
+        updateWrapper.eq("id", id);
+        String sql;
+        if(map.get("status") == -1) {
+            sql = "balance = balance - " + map.get("amount");
+        } else {
+            sql = "balance = balance + " + map.get("amount");
+        }
+        updateWrapper.setSql(sql);
+        boolean update = update(updateWrapper);
+
+        return update?Result.success():Result.error("余额变更失败！");
+    }
+
+    @Override
+    public Result getUserBalance(Integer id) {
+        User user = this.getById(id);
+        return user == null ? Result.error("User not found") : Result.success(user.getBalance());
     }
 }
 

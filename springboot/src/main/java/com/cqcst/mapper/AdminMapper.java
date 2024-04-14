@@ -1,13 +1,10 @@
 package com.cqcst.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.cqcst.entity.Admin;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
-public interface AdminMapper {
-    @Select("select * from admin where username=#{username}")
-    Admin selectByUsername(String username);
+public interface AdminMapper extends BaseMapper<Admin> {
 
-    @Insert("insert into admin (username,password,role,xueyuan) values (#{username},#{password},#{role},#{xueyuan})")
-    void insert(Admin admin);
 }

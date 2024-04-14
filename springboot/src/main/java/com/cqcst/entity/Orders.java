@@ -1,6 +1,7 @@
 package com.cqcst.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -17,7 +18,7 @@ public class Orders implements Serializable {
     private Integer userId;
 
     /**
-     * 0:已下单 1:快递员已接单，待上门取件  2:快递员已取件 3.待付款 4.已付款 5.站点已入库 6.运输过程中 7:到达站点，等待派送 8：已分配快递员，派送中 9:已签收
+     * 0:已下单 1:快递员已接单，待上门取件  2:已取件，待付款 3.空缺 4.已付款 5.站点已入库 6.运输过程中 7:到达站点，等待派送 8：已分配快递员，派送中 9:已签收
      * -1:已取消 -2:物品无法运送 被取消
      */
     private Integer status;
@@ -33,7 +34,9 @@ public class Orders implements Serializable {
     private String receiverName;
 
     private String receiverPhone;
+
     private String receiverProvince;
+
     private String receiverAddress;
 
     private Integer pickerId;
@@ -55,9 +58,11 @@ public class Orders implements Serializable {
     private String paymentMethod;
 
     @TableField(fill = FieldFill.INSERT)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date createTime;
 
     @TableField(fill = FieldFill.INSERT_UPDATE)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date updateTime;
 
     @TableLogic(value="0",delval="1")

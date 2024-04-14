@@ -21,6 +21,7 @@ public class TrackController {
     @GetMapping("/{id}")
     public Result getTrackByOrderId(@PathVariable Integer id) {
       List<Track> list = trackService.getTrackByOrderId(id);
+      System.out.println(list);
       return Result.success(list);
     }
 

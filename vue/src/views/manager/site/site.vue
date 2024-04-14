@@ -53,16 +53,6 @@
       <div>
       </div>
 
-      <!-- <el-dialog v-model="dialogVisible" title="站点信息编辑" style="width:50%">
-          <el-form :model="dialogForm">
-            <el-form-item label="站点id" :label-width="formLabelWidth" aria-disabled="true">
-              <el-input v-model="id" autocomplete="off" />
-            </el-form-item>
-
-
-          </el-form>
-        </el-dialog> -->
-
     </div>
   </div>
 </template>

@@ -1,12 +1,30 @@
 package com.cqcst.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+
 public class Admin {
+
+    @TableId(type = IdType.AUTO)
+    private Integer id;
+
     private String username;
     private String password;
     private Integer status;
     private String name;
-    private String siteId;
+    private Integer siteId;
+
+    private String siteName;
+
     private String phone;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getPhone() {
         return phone;
@@ -39,16 +57,27 @@ public class Admin {
     @Override
     public String toString() {
         return "Admin{" +
-                "username='" + username + '\'' +
+                "id=" + id +
+                ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", status=" + status +
                 ", name='" + name + '\'' +
                 ", siteId='" + siteId + '\'' +
+                ", siteName='" + siteName + '\'' +
+                ", phone='" + phone + '\'' +
                 '}';
     }
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public String getSiteName() {
+        return siteName;
+    }
+
+    public void setSiteName(String siteName) {
+        this.siteName = siteName;
     }
 
     public String getName() {
@@ -59,11 +88,11 @@ public class Admin {
         this.name = name;
     }
 
-    public String getSiteId() {
+    public Integer getSiteId() {
         return siteId;
     }
 
-    public void setSiteId(String siteId) {
+    public void setSiteId(Integer siteId) {
         this.siteId = siteId;
     }
 }

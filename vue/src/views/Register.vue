@@ -56,7 +56,7 @@ const formRef = ref()
 const register = () => {
   formRef.value.validate((valid) => {
     if (valid) {
-      request.post('/register', data.form).then(res => {
+      request.post('/admin/register', data.form).then(res => {
         if (res.code === '200') {
           ElMessage.success('注册成功')
           location.href = '/login'   //跳转到主页

@@ -88,4 +88,10 @@ public class UserController {
             throw new RuntimeException(e);
         }
     }
+
+    @GetMapping("/balance/{id}")
+    public Result getUserBalance(@PathVariable Integer id)
+    {
+        return userService.getUserBalance(id);
+    }
 }

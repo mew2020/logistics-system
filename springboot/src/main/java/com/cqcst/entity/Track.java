@@ -1,6 +1,7 @@
 package com.cqcst.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -19,11 +20,16 @@ public class Track implements Serializable {
     private String location;
 
     @TableField(fill = FieldFill.INSERT)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date createTime;
 
     private Integer siteId;
 
     private String siteName;
+
+    private Integer toSiteId;
+
+    private String toSiteName;
 
     private Integer adminId;
 
@@ -143,6 +149,22 @@ public class Track implements Serializable {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public Integer getToSiteId() {
+        return toSiteId;
+    }
+
+    public void setToSiteId(Integer toSiteId) {
+        this.toSiteId = toSiteId;
+    }
+
+    public String getToSiteName() {
+        return toSiteName;
+    }
+
+    public void setToSiteName(String toSiteName) {
+        this.toSiteName = toSiteName;
     }
 
     @Override

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.cqcst.common.Result;
 import com.cqcst.entity.User;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -19,4 +20,12 @@ public interface UserService extends IService<User> {
     Result updateUser(User user);
 
     Result updatePassword(Integer id, Map<String,String> data);
+
+    List<User> getUserListByAdmin(String condition, Integer status);
+
+    boolean changeStatusByAdmin(Integer id);
+
+    Result updateBalanceByAdmin(Map<String, Integer> map);
+
+    Result getUserBalance(Integer id);
 }
